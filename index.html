@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<head>
+        <title>Amicable Numbers</title>
+        <script language="javascript">
+            function isFactor (start, factor) {
+                if (start % factor == 0) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            function findFactors (number) {
+                var factors = [];
+                for (let i = 1; i <= (number / 2); i++) {
+                    if (isFactor(number, i)) {
+                        factors.push(i);
+                    }
+                }
+                return factors;
+            }
+
+            function isAmicable (list1, list2, num1, num2) {
+                sum1 = 0;
+                for (let i = 0; i < list1.length; i++) {
+                    sum1 += list1.at(i);
+                }
+                sum2 = 0;
+                for (let j = 0; j < list2.length; j++) {
+                    sum2 += list2.at(j);
+                }
+                if (sum1 == num2 && sum2 == num1) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            function write_values(factors1, factors2, val1, val2) {
+                    document.getElementById("factors").innerHTML = "Factors of " + val1 + ": " + factors1.join(" ") + "</br>" + 
+                    "Factors of " + val2 + ": " + factors2.join(" ");
+            }
+            function performAll() {
+                var val1 = document.form1.num1.value;
+                val1 = parseInt(val1);
+                var val2 = document.form1.num2.value;
+                val2 = parseInt(val2);
+                var factors1 = findFactors(val1);
+                var factors2 = findFactors(val2);
+                if (isAmicable(factors1, factors2, val1, val2)) {
+                    document.getElementById("amicable").innerHTML = "The numbers " + val1 + " " + val2 + " are amicable </br>"
+                }
+                else {
+                    document.getElementById("amicable").innerHTML = "The numbers " + val1 + " " + val2 + " are not amicable </br>"
+                }
+                write_values(factors1, factors2, val1, val2);
+            }
+            
+            
+        </script>
+</head>
+
+<body>
+        <form name="form1">
+            <input type="text" name="num1" id="num1">
+            <input type="text" name="num2" id="num2">
+        </form>
+        <button type="submit" form="form1" value="Submit" onclick="performAll()">
+            Submit
+        </button>
+        <div id="amicable">
+
+        </div>
+        <div id="factors">
+
+        </div>
+</body>
